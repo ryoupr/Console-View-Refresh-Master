@@ -4,7 +4,8 @@
   "version": "1.1.1",
   "description": "AWS コンソール画面の自動更新を行う拡張機能",
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "tabs"
   ],
   "action": {
     "default_popup": "popup.html"
