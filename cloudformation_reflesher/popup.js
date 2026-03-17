@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error('アクティブなタブが見つかりません');
       }
       // URLチェックを追加
-      if (!tab.url || (!tab.url.includes('console.aws.amazon.com') || !tab.url.includes('cloudformation'))) {
+      if (!tab.url || !tab.url.includes('console.aws.amazon.com')) {
         throw new Error('このページでは利用できません');
       }
       debugLog('タブ情報:', tab);
