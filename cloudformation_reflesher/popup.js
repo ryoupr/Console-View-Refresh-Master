@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggleButton = document.getElementById('toggleRefresh');
   const intervalInput = document.getElementById('interval');
   const statusDiv = document.getElementById('status');
+  let isRunning = false; // アクション判定用の状態変数
 
   // デバッグログ出力
   function debugLog(message, data = null) {
@@ -27,7 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
       showError('状態情報の取得に失敗しました');
       return;
     }
-    const { isRunning, interval } = state;
+    const { isRunning: running, interval } = state;
+    isRunning = running; // 状態変数を更新
     toggleButton.textContent = isRunning ? '停止' : '開始';
     statusDiv.className = `status ${isRunning ? 'running' : 'stopped'}`;
     statusDiv.textContent = isRunning ? '実行中' : '停止中';
@@ -102,8 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const intervalMs = intervalSeconds * 1000;
       debugLog(`更新間隔を設定: ${intervalMs}ms`);
 
-      // 現在のボタンのテキストに基づいてアクションを決定
-      const currentAction = toggleButton.textContent === '開始' ? 'start' : 'stop';
+      // 状態変数に基づいてアクションを決定
+      const currentAction = isRunning ? 'stop' : 'start';
       debugLog(`実行アクション: ${currentAction}`);
 
       // content.jsへメッセージ送信
